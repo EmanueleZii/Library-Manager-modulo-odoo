@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Autori di esempio -->
+    <record id="author_orwell" model="library.author">
+        <field name="name">George Orwell</field>
+        <field name="bio">Scrittore britannico, autore di 1984 e La fattoria degli animali.</field>
+    </record>
+
+    <record id="author_calvino" model="library.author">
+        <field name="name">Italo Calvino</field>
+        <field name="bio">Scrittore italiano, tra i più importanti del Novecento.</field>
+    </record>
+
+    <!-- Libri di esempio -->
+    <record id="book_1984" model="library.book">
+        <field name="title">1984</field>
+        <field name="isbn">9780451524935</field>
+        <field name="author_id" ref="author_orwell"/>
+        <field name="pages">328</field>
+        <field name="state">available</field>
+    </record>
+
+    <record id="book_cosmicomics" model="library.book">
+        <field name="title">Le cosmicomiche</field>
+        <field name="isbn">9788806220389</field>
+        <field name="author_id" ref="author_calvino"/>
+        <field name="pages">196</field>
+        <field name="state">available</field>
+    </record>
+</odoo>

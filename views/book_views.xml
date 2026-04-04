@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_library_book_list" model="ir.ui.view">
+        <field name="name">library.book.tree</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <tree string="Libri" decoration-muted="state == 'on_loan'">
+                <field name="name"/>
+                <field name="author"/>
+                <field name="year"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'available'"
+                       decoration-warning="state == 'on_loan'"/>
+                <field name="loan_count"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_library_book_form" model="ir.ui.view">
+        <field name="name">library.book.form</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <form string="Libro">
+                <header>
+                    <button name="%(action_library_loan)d"
+                            type="action"
+                            string="Nuovo Prestito"
+                            class="btn-primary"
+                            invisible="state != 'available'"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_loans"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-book">
+                            <field name="loan_count" widget="statinfo" string="Prestiti"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Titolo..."/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="author"/>
+                            <field name="isbn"/>
+                        </group>
+                        <group>
+                            <field name="year"/>
+                            <field name="state" widget="badge"
+                                   decoration-success="state == 'available'"
+                                   decoration-warning="state == 'on_loan'"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_library_book_search" model="ir.ui.view">
+        <field name="name">library.book.search</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Titolo"/>
+                <field name="author"/>
+                <filter name="available" string="Disponibili" domain="[('state','=','available')]"/>
+                <filter name="on_loan" string="In Prestito" domain="[('state','=','on_loan')]"/>
+                <group expand="0" string="Raggruppa per">
+                    <filter name="group_author" string="Autore" context="{'group_by': 'author'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_library_book" model="ir.actions.act_window">
+        <field name="name">Libri</field>
+        <field name="res_model">library.book</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_library_book_search"/>
+    </record>
+
+</odoo>

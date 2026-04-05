@@ -102,3 +102,6 @@ Oppure da interfaccia: **Impostazioni → Aggiorna lista app → cerca "Library 
 
 Sviluppato da **Zigna** come progetto portfolio Odoo 17.  
 `versione: 17.0.1.0.0` · `licenza: LGPL-3` · `dipendenze: base, mail`
+
+## 📄 License  
+This project is licensed under the MIT License.
